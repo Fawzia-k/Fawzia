@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio — Your Name</title>
+<title>Fawzia Khan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Mono:wght@300&display=swap" rel="stylesheet">
 <style>
@@ -67,6 +67,7 @@ nav {
   top: 0;
   background: var(--bg);
   z-index: 20;
+  overflow-x: auto;
 }
 
 nav button {
@@ -82,6 +83,7 @@ nav button {
   color: var(--ink-3);
   padding: 1rem 0;
   margin-right: 2rem;
+  white-space: nowrap;
   transition: color 0.2s, border-color 0.2s;
 }
 
@@ -134,13 +136,13 @@ main { padding: 0 4rem 6rem; }
   border-bottom: 1px solid var(--rule);
 }
 
-/* ── ITEM ── */
+/* ── ITEM (text rows) ── */
 a.item {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: baseline;
   gap: 1rem 2rem;
-  padding: 1.1rem 0 1.1rem 0;
+  padding: 1.1rem 0;
   border-bottom: 1px solid var(--rule);
   text-decoration: none;
   color: inherit;
@@ -168,7 +170,6 @@ a.item:hover .item-arrow { opacity: 1; }
   font-family: var(--font-serif);
   font-size: 1.25rem;
   font-weight: 400;
-  letter-spacing: 0;
   line-height: 1.25;
   transition: color 0.2s;
 }
@@ -194,8 +195,6 @@ a.item:hover .item-title { color: var(--ink-2); }
   font-weight: 300;
 }
 
-.item-meta .year { display: block; }
-
 .badge {
   display: inline-block;
   font-family: var(--font-mono);
@@ -206,7 +205,81 @@ a.item:hover .item-title { color: var(--ink-2); }
   border: 1px solid var(--ink-3);
   color: var(--ink-3);
   border-radius: 2px;
-  margin-top: 4px;
+  font-weight: 300;
+}
+
+/* ── THUMBNAIL GRID ── */
+.thumb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1px;
+  margin-top: 1px;
+  border-top: 1px solid var(--rule);
+}
+
+.thumb-link {
+  display: block;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: #f5f5f3;
+  position: relative;
+  text-decoration: none;
+}
+
+.thumb-link:hover .thumb-overlay { opacity: 1; }
+
+.thumb-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(17,17,16,0.35);
+  opacity: 0;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumb-overlay span {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-weight: 300;
+}
+
+/* folder link — full-width row */
+a.folder-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  color: inherit;
+  transition: padding-left 0.2s;
+  position: relative;
+}
+
+a.folder-link:hover { padding-left: 0.85rem; }
+
+a.folder-link:hover .item-arrow { opacity: 1; }
+
+.folder-label {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  transition: color 0.2s;
+}
+
+a.folder-link:hover .folder-label { color: var(--ink-2); }
+
+.folder-meta {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
   font-weight: 300;
 }
 
@@ -243,6 +316,7 @@ footer a:hover { color: var(--ink); }
   nav button { margin-right: 1rem; }
   a.item { grid-template-columns: 1fr; }
   .item-meta { text-align: left; }
+  .thumb-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
 }
 
 @keyframes fadeUp {
@@ -256,7 +330,7 @@ footer a:hover { color: var(--ink); }
 
 <header>
   <div class="name-block">
-    <h1>Your<br>Name</h1>
+    <h1>Fawzia<br>Khan</h1>
   </div>
   <div>
     <ul class="discipline-list">
@@ -274,6 +348,7 @@ footer a:hover { color: var(--ink); }
   <button data-filter="photo">Photo</button>
   <button data-filter="production">Production</button>
   <button data-filter="design">Design</button>
+  <button data-filter="instagram">Instagram</button>
 </nav>
 
 <main>
@@ -282,68 +357,173 @@ footer a:hover { color: var(--ink); }
   <section class="section" data-section="writing">
     <div class="section-header">
       <h2 class="section-title">Writing</h2>
-      <span class="section-count">6 pieces</span>
     </div>
 
+    <!-- Print -->
     <div class="subsection">
       <div class="subsection-label">Print</div>
 
-      <a class="item" href="#" target="_blank" rel="noopener">
+      <a class="item" href="https://drive.google.com/file/d/1BPXvBXacabUYgrkj2okJuMNym_CUdXSn/view?usp=drive_link" target="_blank" rel="noopener">
         <span class="item-arrow">→</span>
         <span>
-          <span class="item-title">The Architecture of Silence</span>
-          <span class="item-pub">Granta Magazine</span>
+          <span class="item-title">Love In The Time of Venus Retrograde</span>
+          <span class="item-pub">Bridal Asia</span>
         </span>
-        <span class="item-meta"><span class="year">2024</span></span>
+        <span class="item-meta"><span class="badge">PDF</span></span>
       </a>
 
-      <a class="item" href="#" target="_blank" rel="noopener">
+      <a class="item" href="https://drive.google.com/file/d/1JtaaVUHwPTG2VT9pILba5iOmIEsG1k00/view?usp=drive_link" target="_blank" rel="noopener">
         <span class="item-arrow">→</span>
         <span>
-          <span class="item-title">What Rivers Remember</span>
-          <span class="item-pub">The Caravan</span>
+          <span class="item-title">The Business of Weddings</span>
+          <span class="item-pub">Bridal Asia</span>
         </span>
-        <span class="item-meta"><span class="year">2023</span></span>
+        <span class="item-meta"><span class="badge">PDF</span></span>
       </a>
 
-      <a class="item" href="#" target="_blank" rel="noopener">
+      <a class="item" href="https://drive.google.com/file/d/16kkrx-FM1y7w6OPWacxQoHEi5LHhABKk/view?usp=drive_link" target="_blank" rel="noopener">
         <span class="item-arrow">→</span>
         <span>
-          <span class="item-title">Notes on Disappearance</span>
-          <span class="item-pub">Outlook India</span>
+          <span class="item-title">Ready, Set Court</span>
+          <span class="item-pub">Bridal Asia</span>
         </span>
-        <span class="item-meta"><span class="year">2022</span></span>
+        <span class="item-meta"><span class="badge">PDF</span></span>
+      </a>
+
+      <a class="item" href="https://drive.google.com/file/d/11urHVsxStie_yYmr1pzFPcOBN2SpGfL4/view?usp=drive_link" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span>
+          <span class="item-title">Styled, Sealed, Delivered</span>
+          <span class="item-pub">Bridal Asia</span>
+        </span>
+        <span class="item-meta"><span class="badge">PDF</span></span>
       </a>
     </div>
 
+    <!-- Brand Work -->
+    <div class="subsection">
+      <div class="subsection-label">Brand Work</div>
+
+      <a class="item" href="https://docs.google.com/document/d/1-fJASM0eidg5vjMgC8RN_viNdpzfOGn1/edit?usp=drive_link" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span><span class="item-title">Lakme Fashion Week Report 2022</span></span>
+      </a>
+
+      <a class="item" href="https://docs.google.com/document/d/1swj6b5Ry4kt51v5thmgzBTSVcvd0-snX/edit?usp=drive_link" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span><span class="item-title">Mayyur Girotra</span></span>
+      </a>
+
+      <a class="item" href="https://docs.google.com/document/d/1-P-0pOuNoz6N7CJ6qzIL0rtqjW9QEe_j/edit?usp=drive_link" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span><span class="item-title">Outhouse</span></span>
+      </a>
+
+      <a class="item" href="https://docs.google.com/document/d/1j4t6ginxV_irDQ2xdCMfpeO946ICYgwB/edit?usp=drive_link" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span><span class="item-title">Punit Balana</span></span>
+      </a>
+
+      <a class="item" href="https://docs.google.com/document/d/1l7gbUg9zg-bxselNyQ9Jecu8d93XR9p3/edit?usp=drive_link" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span><span class="item-title">Sabyasachi 2021</span></span>
+      </a>
+
+      <a class="item" href="https://docs.google.com/document/d/1RpVxqDndUOtaJ3yjBrsHbn_zR1w1onLr/edit?usp=drive_link" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span><span class="item-title">Sureena Chaudhari</span></span>
+      </a>
+
+      <a class="item" href="https://drive.google.com/file/d/15bq6JSntjj60e_18hsZYJZ3GVPB-shic/view?usp=drive_link" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span><span class="item-title">Sureena Chaudhari Collection</span></span>
+      </a>
+
+      <a class="item" href="https://docs.google.com/document/d/15OktXsIrroZHxhcyy2jpuH-iO-F9EQDS/edit?usp=drive_link" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span><span class="item-title">Sunita Shekhawat</span></span>
+      </a>
+
+      <a class="item" href="https://docs.google.com/document/d/1_VaehALtbZCm4cB8YjyrKyW8VJ_p7tIT/edit?usp=drive_link" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span><span class="item-title">Vaasal</span></span>
+      </a>
+    </div>
+
+    <!-- Digital -->
     <div class="subsection">
       <div class="subsection-label">Digital</div>
 
-      <a class="item" href="#" target="_blank" rel="noopener">
+      <a class="item" href="https://www.esquireindia.co.in/style/just-landed/why-your-dads-closet-holds-the-coolest-menswear-trends-of-today" target="_blank" rel="noopener">
         <span class="item-arrow">→</span>
         <span>
-          <span class="item-title">On Belonging in Cities</span>
-          <span class="item-pub">Mint Lounge</span>
+          <span class="item-title">Why Your Dad's Closet Holds the Coolest Menswear Trends of Today</span>
+          <span class="item-pub">Esquire India</span>
         </span>
-        <span class="item-meta"><span class="year">2024</span></span>
       </a>
 
-      <a class="item" href="#" target="_blank" rel="noopener">
+      <a class="item" href="https://www.esquireindia.co.in/lifestyle/sex-and-relationships/guide-to-creating-a-dating-app-profile-for-men-dos-and-donts-to-find-success-on-tinder-bumble-and-hinge" target="_blank" rel="noopener">
         <span class="item-arrow">→</span>
         <span>
-          <span class="item-title">The New Noise</span>
-          <span class="item-pub">The Atlantic</span>
+          <span class="item-title">Guide to Creating a Dating App Profile for Men</span>
+          <span class="item-pub">Esquire India</span>
         </span>
-        <span class="item-meta"><span class="year">2024</span></span>
       </a>
 
-      <a class="item" href="#" target="_blank" rel="noopener">
+      <a class="item" href="https://elle.in/the-might-of-taylor-swift/" target="_blank" rel="noopener">
         <span class="item-arrow">→</span>
         <span>
-          <span class="item-title">After the Floods</span>
-          <span class="item-pub">Rest of World</span>
+          <span class="item-title">The Might of Taylor Swift</span>
+          <span class="item-pub">Elle India</span>
         </span>
-        <span class="item-meta"><span class="year">2023</span></span>
+      </a>
+
+      <a class="item" href="https://elle.in/the-best-fashion-looks-served-on-gossip-girl/" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span>
+          <span class="item-title">The Best Fashion Looks Served on Gossip Girl</span>
+          <span class="item-pub">Elle India</span>
+        </span>
+      </a>
+
+      <a class="item" href="https://www.kapoorwatch.com/blogs/tennis-and-timekeeping-the-most-memorable-watches-worn-by-tennis-icons/" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span>
+          <span class="item-title">Tennis and Timekeeping: The Most Memorable Watches Worn by Tennis Icons</span>
+          <span class="item-pub">Kapoor Watch</span>
+        </span>
+      </a>
+
+      <a class="item" href="https://www.cladclad.com/clad-musings-with-gaurav-gupta/" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span>
+          <span class="item-title">Clad Musings with Gaurav Gupta</span>
+          <span class="item-pub">Clad</span>
+        </span>
+      </a>
+
+      <a class="item" href="https://www.cladclad.com/the-age-of-ivory-how-ivory-weddings-have-become-the-new-norm-in-2022/" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span>
+          <span class="item-title">The Age of Ivory: How Ivory Weddings Have Become the New Norm</span>
+          <span class="item-pub">Clad</span>
+        </span>
+      </a>
+
+      <a class="item" href="https://www.cbr.com/keanu-reeves-outcome-dark-side-of-hollywood/" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span>
+          <span class="item-title">Keanu Reeves and the Dark Side of Hollywood</span>
+          <span class="item-pub">CBR</span>
+        </span>
+      </a>
+
+      <a class="item" href="https://www.cbr.com/dexter-resurrection-season-2-multiple-killers/" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span>
+          <span class="item-title">Dexter: Resurrection Season 2 — Multiple Killers</span>
+          <span class="item-pub">CBR</span>
+        </span>
       </a>
     </div>
   </section>
@@ -352,69 +532,45 @@ footer a:hover { color: var(--ink); }
   <section class="section" data-section="photo">
     <div class="section-header">
       <h2 class="section-title">Photo</h2>
-      <span class="section-count">3 series</span>
     </div>
 
-    <a class="item" href="#" target="_blank" rel="noopener">
-      <span class="item-arrow">→</span>
-      <span>
-        <span class="item-title">Monsoon Portraits</span>
-        <span class="item-pub">Personal series</span>
-      </span>
-      <span class="item-meta"><span class="year">2024</span></span>
-    </a>
+    <div class="subsection">
+      <div class="subsection-label">Documentary</div>
+      <a class="folder-link" href="https://drive.google.com/drive/folders/1M8oVm2BjneMisvcEqVvr4fZ2yz51F9Kv?usp=drive_link" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span class="folder-label">View folder</span>
+        <span class="folder-meta">Google Drive →</span>
+      </a>
+    </div>
 
-    <a class="item" href="#" target="_blank" rel="noopener">
-      <span class="item-arrow">→</span>
-      <span>
-        <span class="item-title">Urban Geometries</span>
-        <span class="item-pub">Editorial commission</span>
-      </span>
-      <span class="item-meta"><span class="year">2023</span></span>
-    </a>
+    <div class="subsection">
+      <div class="subsection-label">Fashion</div>
+      <a class="folder-link" href="https://drive.google.com/drive/folders/1RzLAxIjvE4zjPF8O4_sEyszOBZr-d4tN?usp=drive_link" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span class="folder-label">View folder</span>
+        <span class="folder-meta">Google Drive →</span>
+      </a>
+    </div>
 
-    <a class="item" href="#" target="_blank" rel="noopener">
-      <span class="item-arrow">→</span>
-      <span>
-        <span class="item-title">Coastline Studies</span>
-        <span class="item-pub">Personal project</span>
-      </span>
-      <span class="item-meta"><span class="year">2022</span></span>
-    </a>
+    <div class="subsection">
+      <div class="subsection-label">Product</div>
+      <a class="folder-link" href="https://drive.google.com/drive/folders/1dPDM-7M0-X0KrXl53qD1yaJwMC4GiZYg?usp=drive_link" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span class="folder-label">View folder</span>
+        <span class="folder-meta">Google Drive →</span>
+      </a>
+    </div>
   </section>
 
   <!-- PRODUCTION -->
   <section class="section" data-section="production">
     <div class="section-header">
       <h2 class="section-title">Production</h2>
-      <span class="section-count">3 projects</span>
     </div>
-
-    <a class="item" href="#" target="_blank" rel="noopener">
+    <a class="folder-link" href="https://drive.google.com/drive/folders/1M7J-gClOPd0AmXwG0dWLaOcqOvudl2Vm?usp=drive_link" target="_blank" rel="noopener">
       <span class="item-arrow">→</span>
-      <span>
-        <span class="item-title">Field Notes</span>
-        <span class="item-pub">Short documentary — 12 min</span>
-      </span>
-      <span class="item-meta"><span class="year">2024</span></span>
-    </a>
-
-    <a class="item" href="#" target="_blank" rel="noopener">
-      <span class="item-arrow">→</span>
-      <span>
-        <span class="item-title">Brand Launch Campaign</span>
-        <span class="item-pub">Video + stills</span>
-      </span>
-      <span class="item-meta"><span class="year">2024</span></span>
-    </a>
-
-    <a class="item" href="#" target="_blank" rel="noopener">
-      <span class="item-arrow">→</span>
-      <span>
-        <span class="item-title">Wanderers</span>
-        <span class="item-pub">Music video</span>
-      </span>
-      <span class="item-meta"><span class="year">2023</span></span>
+      <span class="folder-label">View folder</span>
+      <span class="folder-meta">Google Drive →</span>
     </a>
   </section>
 
@@ -422,45 +578,44 @@ footer a:hover { color: var(--ink); }
   <section class="section" data-section="design">
     <div class="section-header">
       <h2 class="section-title">Design</h2>
-      <span class="section-count">3 projects</span>
+    </div>
+    <a class="folder-link" href="https://drive.google.com/drive/folders/15loW9lV73bmOZDPLHOzNbwDq8u70Trfl?usp=drive_link" target="_blank" rel="noopener">
+      <span class="item-arrow">→</span>
+      <span class="folder-label">View folder</span>
+      <span class="folder-meta">Google Drive →</span>
+    </a>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section class="section" data-section="instagram">
+    <div class="section-header">
+      <h2 class="section-title">Instagram</h2>
     </div>
 
-    <a class="item" href="#" target="_blank" rel="noopener">
+    <a class="item" href="https://www.instagram.com/fawziakhan/" target="_blank" rel="noopener">
       <span class="item-arrow">→</span>
       <span>
-        <span class="item-title">Annual Report 2023</span>
-        <span class="item-pub">Brand identity &amp; layout</span>
+        <span class="item-title">@fawziakhan</span>
       </span>
-      <span class="item-meta"><span class="year">2023</span><span class="badge">PDF</span></span>
+      <span class="item-meta">Instagram →</span>
     </a>
 
-    <a class="item" href="#" target="_blank" rel="noopener">
+    <a class="item" href="https://www.instagram.com/fuzzygushybeauty/" target="_blank" rel="noopener">
       <span class="item-arrow">→</span>
       <span>
-        <span class="item-title">Cultural Festival Zine</span>
-        <span class="item-pub">Self-published, 24 pages</span>
+        <span class="item-title">@fuzzygushybeauty</span>
       </span>
-      <span class="item-meta"><span class="year">2023</span><span class="badge">PDF</span></span>
-    </a>
-
-    <a class="item" href="#" target="_blank" rel="noopener">
-      <span class="item-arrow">→</span>
-      <span>
-        <span class="item-title">Studio Lookbook</span>
-        <span class="item-pub">Editorial design</span>
-      </span>
-      <span class="item-meta"><span class="year">2022</span><span class="badge">PDF</span></span>
+      <span class="item-meta">Instagram →</span>
     </a>
   </section>
 
 </main>
 
 <footer>
-  <p>© 2025 Your Name</p>
+  <p>© 2025 Fawzia Khan</p>
   <div class="footer-links">
-    <a href="mailto:you@email.com">Email</a>
-    <a href="#" target="_blank">Instagram</a>
-    <a href="#" target="_blank">LinkedIn</a>
+    <a href="https://www.instagram.com/fawziakhan/" target="_blank">Instagram</a>
+    <a href="https://www.instagram.com/fuzzygushybeauty/" target="_blank">Fuzzy Gushy</a>
   </div>
 </footer>
 
