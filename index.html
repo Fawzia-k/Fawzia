@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Your Name</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Mono:wght@300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #ffffff;
+  --ink: #111110;
+  --ink-2: #888882;
+  --ink-3: #c4c4bc;
+  --rule: rgba(17,17,16,0.1);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+/* ── HEADER ── */
+header {
+  padding: 5rem 4rem 4rem;
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: end;
+}
+
+.name-block h1 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.discipline-list {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.15rem;
+  color: var(--ink-2);
+  line-height: 2.1;
+  list-style: none;
+  text-align: right;
+}
+
+/* ── NAV ── */
+nav {
+  display: flex;
+  padding: 0 4rem;
+  border-bottom: 1px solid var(--rule);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 20;
+}
+
+nav button {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+  color: var(--ink-3);
+  padding: 1rem 0;
+  margin-right: 2rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+nav button:hover { color: var(--ink); }
+nav button.active { color: var(--ink); border-bottom-color: var(--ink); }
+
+/* ── MAIN ── */
+main { padding: 0 4rem 6rem; }
+
+/* ── SECTION ── */
+.section { margin-top: 4rem; }
+.section[data-hidden="true"] { display: none; }
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.section-count {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 300;
+}
+
+/* ── SUBSECTION ── */
+.subsection { margin-top: 2rem; }
+
+.subsection-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* ── ITEM ── */
+a.item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 1rem 2rem;
+  padding: 1.1rem 0 1.1rem 0;
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  transition: padding-left 0.2s;
+}
+
+a.item:hover { padding-left: 0.85rem; }
+
+.item-arrow {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  color: var(--ink-3);
+  opacity: 0;
+  transition: opacity 0.2s;
+  font-family: var(--font-mono);
+}
+
+a.item:hover .item-arrow { opacity: 1; }
+
+.item-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.25;
+  transition: color 0.2s;
+}
+
+a.item:hover .item-title { color: var(--ink-2); }
+
+.item-pub {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--ink-2);
+  margin-top: 1px;
+}
+
+.item-meta {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  white-space: nowrap;
+  text-align: right;
+  font-weight: 300;
+}
+
+.item-meta .year { display: block; }
+
+.badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 5px;
+  border: 1px solid var(--ink-3);
+  color: var(--ink-3);
+  border-radius: 2px;
+  margin-top: 4px;
+  font-weight: 300;
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 2rem 4rem;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+footer p, footer a {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-decoration: none;
+  font-weight: 300;
+  transition: color 0.2s;
+}
+
+footer a:hover { color: var(--ink); }
+.footer-links { display: flex; gap: 1.5rem; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  header { grid-template-columns: 1fr; padding: 3rem 1.5rem 2rem; }
+  .discipline-list { text-align: left; }
+  nav, main, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+  nav button { margin-right: 1rem; }
+  a.item { grid-template-columns: 1fr; }
+  .item-meta { text-align: left; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.section { animation: fadeUp 0.3s ease both; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="name-block">
+    <h1>Your<br>Name</h1>
+  </div>
+  <div>
+    <ul class="discipline-list">
+      <li>Writing</li>
+      <li>Photography</li>
+      <li>Production</li>
+      <li>Design</li>
+    </ul>
+  </div>
+</header>
+
+<nav id="filters">
+  <button class="active" data-filter="all">All</button>
+  <button data-filter="writing">Writing</button>
+  <button data-filter="photo">Photo</button>
+  <button data-filter="production">Production</button>
+  <button data-filter="design">Design</button>
+</nav>
+
+<main>
+
+  <!-- WRITING -->
+  <section class="section" data-section="writing">
+    <div class="section-header">
+      <h2 class="section-title">Writing</h2>
+      <span class="section-count">6 pieces</span>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-label">Print</div>
+
+      <a class="item" href="#" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span>
+          <span class="item-title">The Architecture of Silence</span>
+          <span class="item-pub">Granta Magazine</span>
+        </span>
+        <span class="item-meta"><span class="year">2024</span></span>
+      </a>
+
+      <a class="item" href="#" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span>
+          <span class="item-title">What Rivers Remember</span>
+          <span class="item-pub">The Caravan</span>
+        </span>
+        <span class="item-meta"><span class="year">2023</span></span>
+      </a>
+
+      <a class="item" href="#" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span>
+          <span class="item-title">Notes on Disappearance</span>
+          <span class="item-pub">Outlook India</span>
+        </span>
+        <span class="item-meta"><span class="year">2022</span></span>
+      </a>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-label">Digital</div>
+
+      <a class="item" href="#" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span>
+          <span class="item-title">On Belonging in Cities</span>
+          <span class="item-pub">Mint Lounge</span>
+        </span>
+        <span class="item-meta"><span class="year">2024</span></span>
+      </a>
+
+      <a class="item" href="#" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span>
+          <span class="item-title">The New Noise</span>
+          <span class="item-pub">The Atlantic</span>
+        </span>
+        <span class="item-meta"><span class="year">2024</span></span>
+      </a>
+
+      <a class="item" href="#" target="_blank" rel="noopener">
+        <span class="item-arrow">→</span>
+        <span>
+          <span class="item-title">After the Floods</span>
+          <span class="item-pub">Rest of World</span>
+        </span>
+        <span class="item-meta"><span class="year">2023</span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- PHOTO -->
+  <section class="section" data-section="photo">
+    <div class="section-header">
+      <h2 class="section-title">Photo</h2>
+      <span class="section-count">3 series</span>
+    </div>
+
+    <a class="item" href="#" target="_blank" rel="noopener">
+      <span class="item-arrow">→</span>
+      <span>
+        <span class="item-title">Monsoon Portraits</span>
+        <span class="item-pub">Personal series</span>
+      </span>
+      <span class="item-meta"><span class="year">2024</span></span>
+    </a>
+
+    <a class="item" href="#" target="_blank" rel="noopener">
+      <span class="item-arrow">→</span>
+      <span>
+        <span class="item-title">Urban Geometries</span>
+        <span class="item-pub">Editorial commission</span>
+      </span>
+      <span class="item-meta"><span class="year">2023</span></span>
+    </a>
+
+    <a class="item" href="#" target="_blank" rel="noopener">
+      <span class="item-arrow">→</span>
+      <span>
+        <span class="item-title">Coastline Studies</span>
+        <span class="item-pub">Personal project</span>
+      </span>
+      <span class="item-meta"><span class="year">2022</span></span>
+    </a>
+  </section>
+
+  <!-- PRODUCTION -->
+  <section class="section" data-section="production">
+    <div class="section-header">
+      <h2 class="section-title">Production</h2>
+      <span class="section-count">3 projects</span>
+    </div>
+
+    <a class="item" href="#" target="_blank" rel="noopener">
+      <span class="item-arrow">→</span>
+      <span>
+        <span class="item-title">Field Notes</span>
+        <span class="item-pub">Short documentary — 12 min</span>
+      </span>
+      <span class="item-meta"><span class="year">2024</span></span>
+    </a>
+
+    <a class="item" href="#" target="_blank" rel="noopener">
+      <span class="item-arrow">→</span>
+      <span>
+        <span class="item-title">Brand Launch Campaign</span>
+        <span class="item-pub">Video + stills</span>
+      </span>
+      <span class="item-meta"><span class="year">2024</span></span>
+    </a>
+
+    <a class="item" href="#" target="_blank" rel="noopener">
+      <span class="item-arrow">→</span>
+      <span>
+        <span class="item-title">Wanderers</span>
+        <span class="item-pub">Music video</span>
+      </span>
+      <span class="item-meta"><span class="year">2023</span></span>
+    </a>
+  </section>
+
+  <!-- DESIGN -->
+  <section class="section" data-section="design">
+    <div class="section-header">
+      <h2 class="section-title">Design</h2>
+      <span class="section-count">3 projects</span>
+    </div>
+
+    <a class="item" href="#" target="_blank" rel="noopener">
+      <span class="item-arrow">→</span>
+      <span>
+        <span class="item-title">Annual Report 2023</span>
+        <span class="item-pub">Brand identity &amp; layout</span>
+      </span>
+      <span class="item-meta"><span class="year">2023</span><span class="badge">PDF</span></span>
+    </a>
+
+    <a class="item" href="#" target="_blank" rel="noopener">
+      <span class="item-arrow">→</span>
+      <span>
+        <span class="item-title">Cultural Festival Zine</span>
+        <span class="item-pub">Self-published, 24 pages</span>
+      </span>
+      <span class="item-meta"><span class="year">2023</span><span class="badge">PDF</span></span>
+    </a>
+
+    <a class="item" href="#" target="_blank" rel="noopener">
+      <span class="item-arrow">→</span>
+      <span>
+        <span class="item-title">Studio Lookbook</span>
+        <span class="item-pub">Editorial design</span>
+      </span>
+      <span class="item-meta"><span class="year">2022</span><span class="badge">PDF</span></span>
+    </a>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2025 Your Name</p>
+  <div class="footer-links">
+    <a href="mailto:you@email.com">Email</a>
+    <a href="#" target="_blank">Instagram</a>
+    <a href="#" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+  const btns = document.querySelectorAll('#filters button');
+  const sections = document.querySelectorAll('.section');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      sections.forEach(s => {
+        s.dataset.hidden = f !== 'all' && s.dataset.section !== f;
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
